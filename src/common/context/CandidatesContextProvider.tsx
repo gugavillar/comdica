@@ -16,12 +16,14 @@ type Candidates = Array<{
   votes: number
 }>
 
+type CandidateValuesToInsert = Pick<Candidates[number], 'id' | 'votes'>
+
 type CandidateContextType = {
   candidates: Candidates
   setCandidates: Dispatch<SetStateAction<Candidates>>
   isUpdating: boolean
   setIsUpdating: Dispatch<SetStateAction<boolean>>
-  handleInsertCandidate: (values: Candidates) => void
+  handleInsertCandidate: (values: Array<CandidateValuesToInsert>) => void
 }
 
 const CANDIDATES_MOCK_DATA = [
@@ -42,8 +44,17 @@ export const CandidateProvider = ({ children }: CandidateProviderProps) => {
   const [isUpdating, setIsUpdating] = useState(false)
   const [candidates, setCandidates] = useState<Candidates>(CANDIDATES_MOCK_DATA)
 
-  const handleInsertCandidate = (values: Candidates) => {
-    console.log(values)
+  const handleInsertCandidate = (values: Array<CandidateValuesToInsert>) => {
+    values?.forEach((value) => {
+      setCandidates((prevCandidates) => {
+        const updatedCandidates = prevCandidates.map((candidate) =>
+          candidate.id === value?.id
+            ? { ...candidate, votes: candidate?.votes + value?.votes }
+            : candidate
+        )
+        return updatedCandidates
+      })
+    })
   }
 
   const values = useMemo(
