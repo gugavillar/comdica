@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 
 import { Flex, FlexProps, Heading } from '@chakra-ui/react'
 
-import { useCandidate } from '../../../context'
+import { useCandidate } from '../../context'
 
 import { CandidateBox } from '.'
 
