@@ -21,10 +21,10 @@ type FieldProps = SelectProps & {
 export const SelectField = forwardRef(
   ({ label, errorMessage, options, ...props }: FieldProps, ref) => {
     return (
-      <Flex minH={32}>
+      <Flex minH={[20, 20, 20, 32]}>
         <FormControl
           isInvalid={!!errorMessage}
-          width={56}
+          width={['full', 'full', 'full', 56]}
         >
           <FormLabel>{label}</FormLabel>
           <Select

@@ -25,7 +25,8 @@ export const ContainerCandidateList = ({ ...props }: ContainerProps) => {
     <Flex
       align='center'
       direction='column'
-      width='50%'
+      width={['100%', '100%', '100%', '50%']}
+      p={4}
       {...props}
     >
       <Heading

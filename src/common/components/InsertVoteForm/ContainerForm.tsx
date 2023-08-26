@@ -47,7 +47,8 @@ export const ContainerForm = () => {
     <FormProvider {...methods}>
       <Flex
         direction='column'
-        width='50%'
+        width={['100%', '100%', '100%', '50%']}
+        p={4}
       >
         <Heading
           textAlign='center'

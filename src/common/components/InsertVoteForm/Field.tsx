@@ -20,10 +20,10 @@ type FieldProps = InputProps & {
 export const Field = forwardRef(
   ({ label, iconField, errorMessage, ...props }: FieldProps, ref) => {
     return (
-      <Flex minH={32}>
+      <Flex minH={[20, 20, 20, 32]}>
         <FormControl
           isInvalid={!!errorMessage}
-          width={56}
+          width={['full', 'full', 'full', 56]}
         >
           <FormLabel>{label}</FormLabel>
           <InputGroup>

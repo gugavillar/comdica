@@ -1,4 +1,4 @@
-import { Flex, HStack } from '@chakra-ui/react'
+import { Flex, Stack } from '@chakra-ui/react'
 import { CheckCircle, Minus } from 'phosphor-react'
 import { useFormContext } from 'react-hook-form'
 
@@ -36,7 +36,11 @@ export const ContainerFields = ({
       justify='space-between'
       width='full'
     >
-      <HStack spacing={4}>
+      <Stack
+        spacing={4}
+        direction={['column', 'column', 'column', 'row']}
+        width='full'
+      >
         <SelectField
           options={candidatesOptions}
           label='Nome do candidato'
@@ -55,7 +59,7 @@ export const ContainerFields = ({
           errorMessage={errors?.candidates?.[index]?.votes?.message}
           iconField={<CheckCircle />}
         />
-      </HStack>
+      </Stack>
       {index >= 1 ? (
         <RemoveButtonFields
           width={32}
