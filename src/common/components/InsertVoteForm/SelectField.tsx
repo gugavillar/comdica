@@ -1,7 +1,6 @@
 import { forwardRef } from 'react'
 
 import {
-  Flex,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -21,30 +20,25 @@ type FieldProps = SelectProps & {
 export const SelectField = forwardRef(
   ({ label, errorMessage, options, ...props }: FieldProps, ref) => {
     return (
-      <Flex minH={[20, 20, 20, 32]}>
-        <FormControl
-          isInvalid={!!errorMessage}
-          width={['full', 'full', 'full', 56]}
+      <FormControl isInvalid={!!errorMessage}>
+        <FormLabel>{label}</FormLabel>
+        <Select
+          {...props}
+          ref={ref}
         >
-          <FormLabel>{label}</FormLabel>
-          <Select
-            {...props}
-            ref={ref}
-          >
-            {options?.map(({ labelOption, valueOption }) => (
-              <option
-                key={valueOption}
-                value={valueOption}
-              >
-                {labelOption}
-              </option>
-            ))}
-          </Select>
-          {errorMessage ? (
-            <FormErrorMessage>{errorMessage}</FormErrorMessage>
-          ) : null}
-        </FormControl>
-      </Flex>
+          {options?.map(({ labelOption, valueOption }) => (
+            <option
+              key={valueOption}
+              value={valueOption}
+            >
+              {labelOption}
+            </option>
+          ))}
+        </Select>
+        {errorMessage ? (
+          <FormErrorMessage>{errorMessage}</FormErrorMessage>
+        ) : null}
+      </FormControl>
     )
   }
 )

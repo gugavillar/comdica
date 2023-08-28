@@ -1,11 +1,11 @@
 import { Text } from '@chakra-ui/react'
 import { Control, useFormContext, useWatch } from 'react-hook-form'
 
-import { FormValues } from './ContainerForm'
+import { FormCandidateValues } from '../ButtonDrawer/DrawerContainer'
 
 export const TotalOfVotes = () => {
-  const { control }: { control: Control<FormValues> } =
-    useFormContext<FormValues>()
+  const { control }: { control: Control<FormCandidateValues> } =
+    useFormContext<FormCandidateValues>()
   const formValues = useWatch({
     name: 'candidates',
     control
@@ -15,5 +15,5 @@ export const TotalOfVotes = () => {
     0
   )
 
-  return <Text>Total votos no cadastro: {totalVotes}</Text>
+  return <Text textAlign='right'>Total votos no cadastro: {totalVotes}</Text>
 }

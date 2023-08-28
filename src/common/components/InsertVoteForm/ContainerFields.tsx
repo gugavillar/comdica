@@ -1,11 +1,13 @@
-import { Flex, Stack } from '@chakra-ui/react'
+import { Fragment } from 'react'
+
+import { VStack } from '@chakra-ui/react'
 import { CheckCircle, Minus } from 'phosphor-react'
 import { useFormContext } from 'react-hook-form'
 
-import { FormValues } from './ContainerForm'
 import { Field } from './Field'
 import { RemoveButtonFields } from './RemoveButtonFields'
 import { useCandidate } from '../../context'
+import { FormCandidateValues } from '../ButtonDrawer/DrawerContainer'
 
 import { SelectField } from '.'
 
@@ -23,7 +25,7 @@ export const ContainerFields = ({
   const {
     register,
     formState: { errors }
-  } = useFormContext<FormValues>()
+  } = useFormContext<FormCandidateValues>()
 
   const candidatesOptions = candidates?.map((candidate) => ({
     labelOption: candidate?.name,
@@ -31,20 +33,27 @@ export const ContainerFields = ({
   }))
 
   return (
-    <Flex
-      align='baseline'
-      justify='space-between'
-      width='full'
-    >
-      <Stack
-        spacing={4}
-        direction={['column', 'column', 'column', 'row']}
+    <Fragment>
+      <VStack
+        spacing={2}
         width='full'
+        align='flex-start'
+        {...(index >= 1 && { mt: 4 })}
       >
+        {index >= 1 ? (
+          <RemoveButtonFields
+            height='max-content'
+            p={0}
+            alignSelf='end'
+            _hover={{ bg: 'none' }}
+            leftIcon={<Minus />}
+            removeFunction={removeFunction}
+          />
+        ) : null}
         <SelectField
           options={candidatesOptions}
-          label='Nome do candidato'
-          placeholder='Nome do candidato'
+          label='Selecione o candidato'
+          placeholder='Selecione o candidato'
           {...register(`candidates.${index}.id` as const)}
           errorMessage={errors?.candidates?.[index]?.id?.message as string}
         />
@@ -59,16 +68,7 @@ export const ContainerFields = ({
           errorMessage={errors?.candidates?.[index]?.votes?.message}
           iconField={<CheckCircle />}
         />
-      </Stack>
-      {index >= 1 ? (
-        <RemoveButtonFields
-          width={32}
-          p={0}
-          _hover={{ bg: 'none' }}
-          leftIcon={<Minus />}
-          removeFunction={removeFunction}
-        />
-      ) : null}
-    </Flex>
+      </VStack>
+    </Fragment>
   )
 }
