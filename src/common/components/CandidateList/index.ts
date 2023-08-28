@@ -1,2 +1,1 @@
-export * from './CandidateBox'
-export * from './ContainerCandidateList'
+export * from './ContainerCandidateListTable'
