@@ -9,7 +9,7 @@ import {
 
 import { v4 as uuidv4 } from 'uuid'
 
-type Candidates = Array<{
+export type Candidates = Array<{
   id: string
   name: string
   number: number

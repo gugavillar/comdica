@@ -1,11 +1,17 @@
+import { Heading, Box } from '@chakra-ui/react'
 
-import { Heading } from '@chakra-ui/react'
+import { ACUTAL_YEAR } from './common'
+import { ContainerCandidateListTable } from './common/components'
+import { ButtonDrawer } from './common/components/ButtonDrawer'
 
-function App() {
-
+export const App = () => {
   return (
-    <Heading>Hello world</Heading>
+    <Box p={4}>
+      <Heading textAlign='center'>
+        Apuração da eleição de conselheiro tutelar {ACUTAL_YEAR}
+      </Heading>
+      <ButtonDrawer />
+      <ContainerCandidateListTable />
+    </Box>
   )
 }
-
-export default App
