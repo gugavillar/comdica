@@ -5,12 +5,10 @@ import { DrawerContainerBody } from './DrawerContainerBody'
 import { candidateResolver } from '../../validations'
 
 export type FormCandidateValues = {
-  candidates:
-    | Array<{
-        id: string
-        votes: number
-      }>
-    | undefined
+  candidates: Array<{
+    id: string
+    votes: number
+  }>
 }
 
 type DrawerContainerProps = {
@@ -24,19 +22,24 @@ export const DrawerContainer = ({ isOpen, onClose }: DrawerContainerProps) => {
     defaultValues: {
       candidates: [{ id: '', votes: 0 }]
     },
-    mode: 'onBlur'
+    mode: 'onChange'
   })
+
+  const handleCloseDrawer = () => {
+    methods.reset()
+    onClose()
+  }
 
   return (
     <FormProvider {...methods}>
       <Drawer
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={handleCloseDrawer}
         placement='right'
         size='md'
       >
         <DrawerOverlay />
-        <DrawerContainerBody onClose={onClose} />
+        <DrawerContainerBody onClose={handleCloseDrawer} />
       </Drawer>
     </FormProvider>
   )
