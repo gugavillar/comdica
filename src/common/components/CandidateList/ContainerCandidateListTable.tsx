@@ -1,22 +1,31 @@
 import { useMemo } from 'react'
 
 import { Table, TableContainer } from '@chakra-ui/react'
+import { useQuery } from 'react-query'
 
-import { BodyTable } from './BodyTable'
-import { HeaderTable } from './HeaderTable'
-import { useCandidate } from '../../context'
+import { TableContent } from './TableContent'
+import { getAllCandidates } from '../../../services/candidate'
+import { CircularLoader } from '../Loader'
 
 export const ContainerCandidateListTable = () => {
-  const { candidates } = useCandidate()
+  const { data, isLoading } = useQuery('candidates', getAllCandidates)
 
   const sortCandidates = useMemo(
     () =>
-      candidates?.sort((candidateA, candidateB) => {
-        if (candidateB.votes < candidateA.votes) return -1
-        if (candidateB.votes > candidateA.votes) return 1
+      data?.data?.sort((candidateA, candidateB) => {
+        if (
+          candidateB.data?.votes.reduce((acc, value) => acc + value, 0) <
+          candidateA.data?.votes.reduce((acc, value) => acc + value, 0)
+        )
+          return -1
+        if (
+          candidateB.data?.votes.reduce((acc, value) => acc + value, 0) >
+          candidateA.data?.votes.reduce((acc, value) => acc + value, 0)
+        )
+          return 1
         return 0
       }),
-    [candidates]
+    [data]
   )
 
   return (
@@ -28,13 +37,16 @@ export const ContainerCandidateListTable = () => {
       borderColor='gray.200'
       borderRadius={8}
     >
-      <Table
-        variant='simple'
-        size='lg'
-      >
-        <HeaderTable />
-        <BodyTable sortCandidates={sortCandidates} />
-      </Table>
+      {isLoading ? (
+        <CircularLoader circularProps={{ size: 40 }} />
+      ) : (
+        <Table
+          variant='simple'
+          size='lg'
+        >
+          <TableContent sortCandidates={sortCandidates} />
+        </Table>
+      )}
     </TableContainer>
   )
 }

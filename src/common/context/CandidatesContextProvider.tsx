@@ -7,8 +7,6 @@ import {
   useState
 } from 'react'
 
-import { v4 as uuidv4 } from 'uuid'
-
 export type Candidates = Array<{
   id: string
   name: string
@@ -26,12 +24,6 @@ type CandidateContextType = {
   handleInsertCandidate: (values: Array<CandidateValuesToInsert>) => void
 }
 
-const CANDIDATES_MOCK_DATA = [
-  { id: uuidv4(), name: 'Candidato', number: 10, votes: 5 },
-  { id: uuidv4(), name: 'Candidato', number: 18, votes: 50 },
-  { id: uuidv4(), name: 'Candidato', number: 21, votes: 45 }
-]
-
 export const CandidateContext = createContext<CandidateContextType>(
   {} as CandidateContextType
 )
@@ -42,7 +34,7 @@ type CandidateProviderProps = {
 
 export const CandidateProvider = ({ children }: CandidateProviderProps) => {
   const [isUpdating, setIsUpdating] = useState(false)
-  const [candidates, setCandidates] = useState<Candidates>(CANDIDATES_MOCK_DATA)
+  const [candidates, setCandidates] = useState<Candidates>([])
 
   const handleInsertCandidate = (values: Array<CandidateValuesToInsert>) => {
     values?.forEach((value) => {

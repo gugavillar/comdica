@@ -3,10 +3,11 @@ import { Fragment } from 'react'
 import { VStack } from '@chakra-ui/react'
 import { CheckCircle, Minus } from 'phosphor-react'
 import { useFormContext } from 'react-hook-form'
+import { useQuery } from 'react-query'
 
 import { Field } from './Field'
 import { RemoveButtonFields } from './RemoveButtonFields'
-import { useCandidate } from '../../context'
+import { getAllCandidates } from '../../../services/candidate'
 import { FormCandidateValues } from '../ButtonDrawer/DrawerContainer'
 
 import { SelectField } from '.'
@@ -20,16 +21,15 @@ export const ContainerFields = ({
   removeFunction,
   index
 }: ContainerFieldsProps) => {
-  const { candidates } = useCandidate()
-
+  const { data, isLoading } = useQuery('candidates', getAllCandidates)
   const {
     register,
     formState: { errors }
   } = useFormContext<FormCandidateValues>()
 
-  const candidatesOptions = candidates?.map((candidate) => ({
-    labelOption: candidate?.name,
-    valueOption: candidate?.id
+  const candidatesOptions = data?.data?.map((candidate) => ({
+    labelOption: candidate?.data?.name,
+    valueOption: candidate?.ref?.value?.id
   }))
 
   return (
@@ -56,6 +56,7 @@ export const ContainerFields = ({
           placeholder='Selecione o candidato'
           {...register(`candidates.${index}.id` as const)}
           errorMessage={errors?.candidates?.[index]?.id?.message as string}
+          isDisabled={isLoading}
         />
 
         <Field

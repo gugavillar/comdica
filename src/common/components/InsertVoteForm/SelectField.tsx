@@ -11,10 +11,12 @@ import {
 type FieldProps = SelectProps & {
   label: string
   errorMessage: string | undefined
-  options: Array<{
-    labelOption: string
-    valueOption: string | number
-  }>
+  options:
+    | Array<{
+        labelOption: string
+        valueOption: string | number
+      }>
+    | undefined
 }
 
 export const SelectField = forwardRef(

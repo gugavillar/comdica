@@ -5,17 +5,23 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import { App } from './App'
-import { CandidateProvider } from './common/context'
 
 const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider
+      toastOptions={{
+        defaultOptions: {
+          position: 'top-right',
+          duration: 2500,
+          isClosable: true,
+          variant: 'top-accent'
+        }
+      }}
+    >
       <QueryClientProvider client={queryClient}>
-        <CandidateProvider>
-          <App />
-        </CandidateProvider>
+        <App />
       </QueryClientProvider>
     </ChakraProvider>
   </React.StrictMode>
