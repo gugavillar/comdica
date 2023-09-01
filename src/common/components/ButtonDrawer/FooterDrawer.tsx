@@ -1,10 +1,14 @@
 import { DrawerFooter, Flex, Button } from '@chakra-ui/react'
+import { useFormContext } from 'react-hook-form'
 
 type FooterDrawerProps = {
   onClose: () => void
 }
 
 export const FooterDrawer = ({ onClose }: FooterDrawerProps) => {
+  const {
+    formState: { isSubmitting }
+  } = useFormContext()
   return (
     <DrawerFooter>
       <Flex
@@ -19,6 +23,7 @@ export const FooterDrawer = ({ onClose }: FooterDrawerProps) => {
           Limpar
         </Button>
         <Button
+          isDisabled={isSubmitting}
           colorScheme='blue'
           width={32}
           type='submit'

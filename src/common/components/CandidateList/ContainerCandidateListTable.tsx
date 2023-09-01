@@ -8,7 +8,9 @@ import { getAllCandidates } from '../../../services/candidate'
 import { CircularLoader } from '../Loader'
 
 export const ContainerCandidateListTable = () => {
-  const { data, isLoading } = useQuery('candidates', getAllCandidates)
+  const { data, isLoading } = useQuery('candidates', getAllCandidates, {
+    staleTime: Infinity
+  })
 
   const sortCandidates = useMemo(
     () =>
