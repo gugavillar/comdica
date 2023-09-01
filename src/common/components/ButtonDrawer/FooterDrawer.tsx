@@ -1,6 +1,8 @@
 import { DrawerFooter, Flex, Button } from '@chakra-ui/react'
 import { useFormContext } from 'react-hook-form'
 
+import { buttonsProps } from '../..'
+
 type FooterDrawerProps = {
   onClose: () => void
 }
@@ -24,7 +26,7 @@ export const FooterDrawer = ({ onClose }: FooterDrawerProps) => {
         </Button>
         <Button
           isDisabled={isSubmitting}
-          colorScheme='blue'
+          {...buttonsProps}
           width={32}
           type='submit'
         >

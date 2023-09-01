@@ -35,7 +35,7 @@ export const DrawerContainer = ({ isOpen, onClose }: DrawerContainerProps) => {
       <Drawer
         isOpen={isOpen}
         onClose={handleCloseDrawer}
-        placement='left'
+        placement='right'
         size='md'
       >
         <DrawerOverlay />
