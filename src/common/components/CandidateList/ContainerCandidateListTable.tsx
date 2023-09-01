@@ -38,14 +38,12 @@ export const ContainerCandidateListTable = () => {
       border='1px solid'
       borderColor='gray.200'
       borderRadius={8}
+      boxShadow='base'
     >
       {isLoading ? (
         <CircularLoader circularProps={{ size: 40 }} />
       ) : (
-        <Table
-          variant='simple'
-          size='lg'
-        >
+        <Table size='lg'>
           <TableContent sortCandidates={sortCandidates} />
         </Table>
       )}

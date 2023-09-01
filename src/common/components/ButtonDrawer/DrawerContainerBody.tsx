@@ -48,8 +48,16 @@ export const DrawerContainerBody = ({ onClose }: DrawerContainerBodyProps) => {
       onSubmit={handleSubmit(onSubmitHandler)}
     >
       <DrawerContent>
-        <DrawerCloseButton />
-        <DrawerHeader>Cadastro de votos</DrawerHeader>
+        <DrawerCloseButton
+          color='green-haze.300'
+          _hover={{ bg: 'none' }}
+        />
+        <DrawerHeader
+          bg='gulf-blue.950'
+          color='white'
+        >
+          Cadastro de votos
+        </DrawerHeader>
         <BodyDrawer />
         <FooterDrawer onClose={onClose} />
       </DrawerContent>

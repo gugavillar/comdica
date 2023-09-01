@@ -15,5 +15,12 @@ export const TotalOfVotes = () => {
     0
   )
 
-  return <Text textAlign='right'>Total votos no cadastro: {totalVotes}</Text>
+  return (
+    <Text
+      textAlign='right'
+      fontWeight='bold'
+    >
+      Total votos no cadastro: {totalVotes}
+    </Text>
+  )
 }
