@@ -1,34 +1,16 @@
-import { useMemo } from 'react'
-
 import { Table, TableContainer } from '@chakra-ui/react'
 import { useQuery } from 'react-query'
 
 import { TableContent } from './TableContent'
+import { candidatesSortTable } from '../../../helpers'
 import { getAllCandidates } from '../../../services/candidate'
 import { CircularLoader } from '../Loader'
 
 export const ContainerCandidateListTable = () => {
-  const { data, isLoading } = useQuery('candidates', getAllCandidates, {
-    staleTime: Infinity
+  const { data, isLoading } = useQuery('candidatesTable', getAllCandidates, {
+    staleTime: Infinity,
+    select: (candidates) => candidates?.data?.sort(candidatesSortTable)
   })
-
-  const sortCandidates = useMemo(
-    () =>
-      data?.data?.sort((candidateA, candidateB) => {
-        if (
-          candidateB.data?.votes.reduce((acc, value) => acc + value, 0) <
-          candidateA.data?.votes.reduce((acc, value) => acc + value, 0)
-        )
-          return -1
-        if (
-          candidateB.data?.votes.reduce((acc, value) => acc + value, 0) >
-          candidateA.data?.votes.reduce((acc, value) => acc + value, 0)
-        )
-          return 1
-        return 0
-      }),
-    [data]
-  )
 
   return (
     <TableContainer
@@ -44,7 +26,7 @@ export const ContainerCandidateListTable = () => {
         <CircularLoader circularProps={{ size: 40 }} />
       ) : (
         <Table size='lg'>
-          <TableContent sortCandidates={sortCandidates} />
+          <TableContent sortCandidates={data} />
         </Table>
       )}
     </TableContainer>

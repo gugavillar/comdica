@@ -10,7 +10,11 @@ export const Header = () => {
       width='full'
       px={6}
       align='center'
-      justify='space-evenly'
+      justify={{
+        base: 'space-between',
+        md: 'space-between',
+        lg: 'space-evenly'
+      }}
       bg='gulf-blue.950'
     >
       <Center
@@ -27,7 +31,8 @@ export const Header = () => {
       </Center>
       <Heading
         color='white'
-        fontSize='3xl'
+        fontSize={{ base: 0, md: '2xl', lg: '3xl' }}
+        display={{ base: 'none', md: 'block', lg: 'block' }}
       >
         Apuração da eleição de Conselheiro Tutelar {ACUTAL_YEAR}
       </Heading>

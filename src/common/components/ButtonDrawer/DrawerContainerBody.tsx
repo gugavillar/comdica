@@ -30,7 +30,7 @@ export const DrawerContainerBody = ({ onClose }: DrawerContainerBodyProps) => {
       toast({
         status: 'success',
         description: 'Votos inseridos com sucesso.',
-        onCloseComplete: () => queryCache.invalidateQueries('candidates')
+        onCloseComplete: () => queryCache.invalidateQueries('candidatesTable')
       })
     } catch {
       toast({
