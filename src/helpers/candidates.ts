@@ -4,16 +4,13 @@ export const candidatesSortTable = (
   candidateA: FaunaGenericUniqueType<CandidatesType>,
   candidateB: FaunaGenericUniqueType<CandidatesType>
 ) => {
-  if (
-    candidateB.data?.votes.reduce((acc, value) => acc + value, 0) <
-    candidateA.data?.votes.reduce((acc, value) => acc + value, 0)
-  )
-    return -1
-  if (
-    candidateB.data?.votes.reduce((acc, value) => acc + value, 0) >
-    candidateA.data?.votes.reduce((acc, value) => acc + value, 0)
-  )
-    return 1
+  const votesA = candidateA.data?.votes.reduce((acc, value) => acc + value, 0)
+  const votesB = candidateB.data?.votes.reduce((acc, value) => acc + value, 0)
+
+  if (votesB < votesA) return -1
+
+  if (votesB > votesA) return 1
+
   return 0
 }
 
