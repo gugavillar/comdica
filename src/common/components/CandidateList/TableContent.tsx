@@ -5,17 +5,7 @@ import { HeaderTable } from './HeaderTable'
 import { CandidatesType } from '../../../@types'
 
 export type TableContentProps = {
-  sortCandidates:
-    | Array<{
-        data: CandidatesType
-        ref: {
-          value: {
-            id: string
-          }
-        }
-        ts: number
-      }>
-    | undefined
+  sortCandidates: Array<CandidatesType> | undefined
 }
 
 export const TableContent = ({ sortCandidates }: TableContentProps) => {

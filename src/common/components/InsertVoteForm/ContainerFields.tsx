@@ -7,8 +7,7 @@ import { useQuery } from 'react-query'
 
 import { Field } from './Field'
 import { RemoveButtonFields } from './RemoveButtonFields'
-import { candidatesSortField, candidatesToSelectField } from '../../../helpers'
-import { getAllCandidates } from '../../../services/candidate'
+import { getAllCandidatesOrderByNameToSelectField } from '../../../services/candidate'
 import { FormCandidateValues } from '../ButtonDrawer/DrawerContainer'
 
 import { SelectField } from '.'
@@ -22,11 +21,14 @@ export const ContainerFields = ({
   removeFunction,
   index
 }: ContainerFieldsProps) => {
-  const { data, isLoading } = useQuery('candidatesFields', getAllCandidates, {
-    staleTime: Infinity,
-    select: (candidates) =>
-      candidates?.data?.map(candidatesToSelectField).sort(candidatesSortField)
-  })
+  const { data, isLoading } = useQuery(
+    'candidatesFields',
+    getAllCandidatesOrderByNameToSelectField,
+    {
+      staleTime: Infinity,
+      select: (candidates) => candidates?.data?.data
+    }
+  )
   const {
     register,
     formState: { errors }

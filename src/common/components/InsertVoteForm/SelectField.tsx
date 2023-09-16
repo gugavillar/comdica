@@ -8,15 +8,12 @@ import {
   SelectProps
 } from '@chakra-ui/react'
 
+import { SelectFieldOptions } from '../../../@types'
+
 type FieldProps = SelectProps & {
   label: string
   errorMessage: string | undefined
-  options:
-    | Array<{
-        labelOption: string
-        valueOption: string | number
-      }>
-    | undefined
+  options: Array<SelectFieldOptions> | undefined
 }
 
 export const SelectField = forwardRef(

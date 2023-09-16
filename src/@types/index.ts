@@ -1,1 +1,2 @@
-export * from './genericFauna'
+export * from './candidates'
+export * from './common'
