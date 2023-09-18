@@ -1,27 +1,51 @@
-# React + TypeScript + Vite
+# People Election With React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a people election project developed using Vite, ReactJS, TypeScript, ReactQuery, FaunaDB and Auth0. It allows you to record votes, track the vote count, and visualize election results in a simple and efficient manner.
 
-Currently, two official plugins are available:
+# Prerequisites
+Before getting started, make sure you have the following tools installed on your machine:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Node.js - Ensure you have Node.js installed to run the development environment.
 
-## Expanding the ESLint configuration
+# Installation
+Follow these steps to set up and run the project:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1 - Clone this repository to your local environment:
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```
+   git clone https://github.com/gugavillar/comdica-election.git
+   cd comdica-election
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2 - Install project dependencies
+
+```
+   npm install
+```
+or
+```
+   yarn install
+```
+
+# Usage
+Before you run the project you nedd to create a env file based on the example configuration in the .env.example file, maybe you need to create a account in [fauna](https://fauna.com/) and [auth0](https://auth0.com/)
+
+You can follow the configuration in docs to create the API keys.
+
+To start the development server and view the project in your web browser, run the following command:
+
+```
+   npm run dev
+```
+or
+```
+   yarn dev
+```
+
+This will start the development server and automatically open the project in your default web browser. You can access the people election app at http://localhost:5173
+
+# Features
+- Record votes for different candidates.
+- Store votes in the faunaDB.
+- Visualize candidates positions in home page.
+- Need user and login to add votes to the candidates.
