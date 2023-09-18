@@ -30,6 +30,16 @@ or
 # Usage
 Before you run the project you nedd to create a env file based on the example configuration in the .env.example file, maybe you need to create a account in [fauna](https://fauna.com/) and [auth0](https://auth0.com/)
 
+When you create the database in fauna you need to create a collection with name 'candidate' and a new document with the following properties. If you want to change names you need modify the queries in the candidates.ts file in services folder.
+```
+{
+  candidate_name: "John Doe",
+  name: "Doe",
+  number: 0,
+  votes: []
+}
+```
+
 You can follow the configuration in docs to create the API keys.
 
 To start the development server and view the project in your web browser, run the following command:
