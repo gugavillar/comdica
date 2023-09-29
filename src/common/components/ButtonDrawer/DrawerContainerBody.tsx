@@ -1,3 +1,4 @@
+import { useAuth0 } from '@auth0/auth0-react'
 import {
   DrawerContent,
   DrawerCloseButton,
@@ -23,8 +24,20 @@ export const DrawerContainerBody = ({ onClose }: DrawerContainerBodyProps) => {
   const queryCache = useQueryClient()
   const toast = useToast()
   const mutation = useMutation(insertCandidateVotes)
+  const { isAuthenticated, user, logout } = useAuth0()
 
   const onSubmitHandler = async (values: FormCandidateValues) => {
+    if (
+      !isAuthenticated ||
+      user?.email !== import.meta.env.VITE_USER_PERMITTED
+    ) {
+      logout({ logoutParams: { returnTo: window.location.origin } })
+      return toast({
+        status: 'error',
+        description: 'Usuário sem permissão para efetuar essa operação.'
+      })
+    }
+
     try {
       await mutation.mutateAsync(values)
       toast({

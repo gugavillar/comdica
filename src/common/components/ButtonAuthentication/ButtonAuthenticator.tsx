@@ -8,7 +8,7 @@ import { buttonsProps } from '../..'
 type ContainerButtonsProps = FlexProps
 
 export const ButtonAuthenticator = ({ ...props }: ContainerButtonsProps) => {
-  const { isAuthenticated } = useAuth0()
+  const { isAuthenticated, isLoading } = useAuth0()
   return (
     <Flex
       gap={4}
@@ -17,9 +17,15 @@ export const ButtonAuthenticator = ({ ...props }: ContainerButtonsProps) => {
       {...props}
     >
       {isAuthenticated ? (
-        <ButtonLogout {...buttonsProps} />
+        <ButtonLogout
+          isLoading={isLoading}
+          {...buttonsProps}
+        />
       ) : (
-        <ButtonLogin {...buttonsProps} />
+        <ButtonLogin
+          isLoading={isLoading}
+          {...buttonsProps}
+        />
       )}
     </Flex>
   )
