@@ -24,13 +24,10 @@ export const DrawerContainerBody = ({ onClose }: DrawerContainerBodyProps) => {
   const queryCache = useQueryClient()
   const toast = useToast()
   const mutation = useMutation(insertCandidateVotes)
-  const { isAuthenticated, user, logout } = useAuth0()
+  const { isAuthenticated, logout } = useAuth0()
 
   const onSubmitHandler = async (values: FormCandidateValues) => {
-    if (
-      !isAuthenticated ||
-      user?.email !== import.meta.env.VITE_USER_PERMITTED
-    ) {
+    if (!isAuthenticated) {
       logout({ logoutParams: { returnTo: window.location.origin } })
       return toast({
         status: 'error',
