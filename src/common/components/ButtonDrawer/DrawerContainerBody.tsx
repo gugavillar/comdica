@@ -23,7 +23,12 @@ export const DrawerContainerBody = ({ onClose }: DrawerContainerBodyProps) => {
 
   const queryCache = useQueryClient()
   const toast = useToast()
-  const mutation = useMutation(insertCandidateVotes)
+  const { mutateAsync } = useMutation({
+    mutationFn: insertCandidateVotes,
+    onSuccess: () => {
+      queryCache.invalidateQueries(['candidatesTableVotes'])
+    }
+  })
   const { isAuthenticated, logout } = useAuth0()
 
   const onSubmitHandler = async (values: FormCandidateValues) => {
@@ -36,12 +41,10 @@ export const DrawerContainerBody = ({ onClose }: DrawerContainerBodyProps) => {
     }
 
     try {
-      await mutation.mutateAsync(values)
+      await mutateAsync(values)
       toast({
         status: 'success',
-        description: 'Votos inseridos com sucesso.',
-        onCloseComplete: () =>
-          queryCache.invalidateQueries('candidatesTableVotes')
+        description: 'Votos inseridos com sucesso.'
       })
     } catch {
       toast({
